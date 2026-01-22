@@ -31,16 +31,45 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.(scss|css)$/,
+                test: /\.css$/,
+                include: /node_modules[\\/]swiper/,
                 use: [
-                    { loader: MiniCssExtractPlugin.loader, options: {} },
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
-                        options: { url: true, import: true },
+                        options: {
+                            importLoaders: 0
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                exclude: /node_modules[\\/]swiper/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 1
+                        }
                     },
-                    { loader: 'postcss-loader' },
-                    { loader: 'sass-loader' },
-                ],
+                    'postcss-loader'
+                ]
+            },
+            {
+                test: /\.(scss|sass)$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            importLoaders: 2
+                        }
+                    },
+                    'postcss-loader',
+                    'sass-loader'
+                ]
             },
             {
                 test: /\.(png|jpg|jpeg|gif)$/i,
