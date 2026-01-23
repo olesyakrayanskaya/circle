@@ -1,0 +1,38 @@
+@use '../abstracts';
+
+.section {
+    width: 100%;
+    height: 250px;
+    background-color: aqua;
+}
+
+.info.swiper {
+    width: 600px;
+    height: 300px;
+}
+
+.info__pagination.swiper-pagination.swiper-pagination-bullets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.info__pagination .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    margin: 0;
+    border-radius: 50%;
+    background-color: #42567a;
+    opacity: 0.4;
+}
+
+.info__pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+@media (min-width: 900px) {
+    .info__pagination.swiper-pagination {
+        display: none;
+    }
+}

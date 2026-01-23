@@ -1,4 +1,4 @@
-@use './variables';
+@use '../abstracts';
 
 * {
     box-sizing: border-box;
@@ -25,9 +25,4 @@ body {
     margin: 0 auto;
     width: 100%;
     max-width: 1440px;
-}
-
-.swiper {
-  width: 600px;
-  height: 300px;
 }
