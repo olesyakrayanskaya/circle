@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('PT Sans'),
+        local('PTSans'),
+        url('../assets/fonts/PTSans-Regular.woff2') format('woff2'),
+}
+
+@font-face {
+    font-family: 'PT Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: local('PT Sans'),
+        local('PTSans'),
+        url('../assets/fonts/PTSans-Bold.woff2') format('woff2'),
+}
+
+@font-face {
+    font-family: 'Bebas Neue';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Bebas Neue'),
+        local('BebasNeue'),
+        url('../assets/fonts/BebasNeue-Regular.woff2') format('woff2'),
+}

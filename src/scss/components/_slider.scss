@@ -1,11 +1,5 @@
 @use '../abstracts';
 
-.section {
-    width: 100%;
-    height: 250px;
-    background-color: aqua;
-}
-
 .info.swiper {
     width: 600px;
     height: 300px;
@@ -32,7 +26,7 @@
 }
 
 @media (min-width: 900px) {
-    .info__pagination.swiper-pagination {
+    .info__pagination.swiper-pagination.swiper-pagination-bullets {
         display: none;
     }
 }
