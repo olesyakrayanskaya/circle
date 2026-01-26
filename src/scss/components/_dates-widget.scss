@@ -1,0 +1,23 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.dates-widget {
+    min-height: 100vh;
+    border-left: 1px solid rgba(variables.$main-color, 0.1);
+    border-right: 1px solid rgba(variables.$main-color, 0.1);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: calc(50% - 0.5px);
+        z-index: 1;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(variables.$main-color, 0.1);
+
+        @media (max-width: variables.$mobile-bp) {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,220 @@
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
+
+.dates {
+    position: relative;
+    min-height: 800px;
+    padding-top: variables.$padding-top;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: calc(variables.$padding-top + variables.$radius - 0.5px);
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 1px;
+        background-color: rgba(variables.$main-color, 0.1);
+    }
+
+    @media (max-width: variables.$mobile-bp) {
+        margin-top: 60px;
+    }
+
+    &__title {
+        position: relative;
+        @include mixins.h2-text;
+        padding-left: variables.$padding-left;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: linear-gradient(to bottom,
+                    #3877EE -5.56%,
+                    #3877EE 0%,
+                    #EF5DA8 94.44%,
+                    #EF5DA8 100%);
+        }
+    }
+
+    &__period {
+        position: absolute;
+        top: calc(variables.$padding-top + variables.$radius - 78.5px);
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+        pointer-events: none;
+
+        .start {
+            @include mixins.start-date-text;
+        }
+
+        .end {
+            @include mixins.end-date-text;
+        }
+    }
+
+    &__circle {
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2*variables.$radius;
+        height: 2*variables.$radius;
+        left: calc(50% - variables.$radius);
+        top: variables.$padding-top;
+        border: 1px solid rgba(variables.$main-color, 0.1);
+        border-radius: 50%;
+        pointer-events: all;
+    }
+
+    &__point {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -1*variables.$point-radius;
+        margin-top: -1*variables.$point-radius;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        width: variables.$point-radius*2;
+        height: variables.$point-radius*2;
+        border-radius: 50%;
+        background-color: variables.$main-color;
+        transition: width variables.$transition-time linear, height variables.$transition-time linear;
+
+        // Анимация движения по окружности
+        animation-duration: 12s;
+        animation-timing-function: linear;
+        // animation-iteration-count: infinite;
+        animation-direction: reverse;
+        transform-origin: center;
+
+        @for $i from 1 through variables.$item-count {
+            $angle: (
+                variables.$item-count - $i + 1) * calc(360deg / variables.$item-count) - 60deg;
+            $start-angle: $angle;
+            $end-angle: $angle + 360deg;
+
+            &:nth-child(#{$i}) {
+                // Устанавливаем начальную позицию
+                transform: rotate($angle) translate(variables.$radius) rotate(-$angle
+                );
+
+            // Создаем уникальное имя анимации для каждого элемента
+            $animation-name: rotatePoint#{$i};
+
+            // Определяем анимацию
+            animation-name: $animation-name;
+
+            // Создаем keyframes динамически
+            @at-root {
+                @keyframes #{$animation-name} {
+                    0% {
+                        transform: rotate($start-angle) translate(variables.$radius) rotate(-$start-angle);
+                    }
+
+                    100% {
+                        transform: rotate($end-angle) translate(variables.$radius) rotate(-$end-angle);
+                    }
+                }
+            }
+        }
+    }
+
+    cursor: pointer;
+}
+
+&__point_active {
+    margin-left: -1*variables.$item-radius;
+    margin-top: -1*variables.$item-radius;
+    width: variables.$item-radius*2;
+    height: variables.$item-radius*2;
+    background-color: variables.$bcg-color;
+    border: 1px solid rgba(variables.$item-active-color, 0.5);
+}
+
+&__item-num {
+    display: none;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+}
+
+&__point_active>&__item-num {
+    display: inline;
+}
+
+&__info-title {
+    position: absolute;
+    left: calc(50% + variables.$radius - 84px);
+    top: calc(variables.$padding-top + variables.$item-radius - 10px);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+}
+
+&__pagination {
+    position: absolute;
+    bottom: 0;
+    left: variables.$padding-left;
+}
+
+&__num {
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+&__btns {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+&__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color variables.$transition-time linear;
+    border: 1px solid rgba(variables.$main-color, 0.5);
+
+    @media (hover:hover) {
+        &:hover {
+            background-color: #FFFF;
+        }
+    }
+
+    @media (hover:none) {
+        &:active {
+            background-color: #FFFF;
+        }
+    }
+
+
+    & svg path {
+        stroke: rgba(variables.$main-color, 0.5);
+    }
+
+    &:disabled {
+        border: 1px solid rgba(#9BA5B9, 0.5);
+    }
+
+    &:disabled svg path {
+        stroke: rgba(#9BA5B9, 0.5);
+    }
+}
+
+}

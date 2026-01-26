@@ -1,1 +1,60 @@
 @use './variables';
+
+@mixin h2-text {
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 120%;
+
+    @media (max-width: 600px) {
+        font-size: 20px;
+    }
+}
+
+@mixin start-date-text {
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 80%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: variables.$start-date-color;
+
+    @media (max-width: 600px) {
+        font-size: 56px;
+    }
+}
+
+@mixin end-date-text {
+    font-weight: 700;
+    font-size: 200px;
+    line-height: 80%;
+    letter-spacing: -0.02em;
+    text-align: center;
+    color: variables.$end-date-color;
+
+    @media (max-width: 600px) {
+        font-size: 56px;
+    }
+}
+
+@mixin date-info-title {
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: variables.$date-info-color;
+
+    @media (max-width: 600px) {
+        font-size: 16px;
+    }
+}
+
+@mixin date-info-text {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 150%;
+
+    @media (max-width: 600px) {
+        font-size: 14px;
+        line-height: 145%;
+    }
+}
