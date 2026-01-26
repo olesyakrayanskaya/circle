@@ -1,6 +1,66 @@
-@use '../abstracts';
+@use '../abstracts/variables';
+@use '../abstracts/mixins';
 
 .info.swiper {
-    width: 600px;
-    height: 300px;
+    width: 100%;
+    padding-left: variables.$padding-left;
+    padding-top: 56px;
+    padding-right: 42px;
+    padding-bottom: 30px;
+}
+
+.info {
+    overflow: visible;    
+
+    &__inner {
+        width: 100%;
+        position: relative;
+    }
+
+    .info__slide {
+        opacity: 1;
+        transition: opacity 0.2s;
+    }
+
+    .info__slide:not(.swiper-slide-visible) {
+        opacity: 0;
+    }
+
+    &__title {
+        @include mixins.date-info-title;
+        margin-bottom: 15px;
+    }
+
+    &__text {
+        @include mixins.date-info-text;
+    }
+
+    &__btn {
+        position: absolute;
+        z-index: 4;
+        top: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #FFFF;
+        box-shadow: 0 0 15px 0 rgba(56, 119, 238, 0.1);
+        cursor: pointer;
+
+        &_next {
+            right: 30px;
+            padding-left: 5px;
+        }
+
+        &_prev {
+            left: 30px;
+            padding-right: 2px;
+        }
+
+        &.swiper-button-disabled {
+            display: none;
+        }
+    }
 }

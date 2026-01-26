@@ -11,10 +11,11 @@ Swiper.use([Navigation, Pagination]);
 const swiperOptions: SwiperOptions = {
   modules: [Navigation, Pagination],
   direction: 'horizontal',
-  loop: true,
+  loop: false,
   slidesPerView: 1,
   spaceBetween: 25,
   watchOverflow: true,
+  watchSlidesProgress: true,
   mousewheel: {
     invert: true,
   },
@@ -40,7 +41,7 @@ const swiperOptions: SwiperOptions = {
       spaceBetween: 80
     },
     1920: {
-      slidesPerView: 4,
+      slidesPerView: 3,
       spaceBetween: 80
     }
   },
