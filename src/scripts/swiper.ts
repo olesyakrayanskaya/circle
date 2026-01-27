@@ -8,52 +8,37 @@ import 'swiper/css/pagination';
 
 Swiper.use([Navigation, Pagination]);
 
-const swiperOptions: SwiperOptions = {
-  modules: [Navigation, Pagination],
-  direction: 'horizontal',
-  loop: false,
-  slidesPerView: 1,
-  spaceBetween: 25,
-  watchOverflow: true,
-  watchSlidesProgress: true,
-  mousewheel: {
-    invert: true,
-  },
-  breakpoints: {
-    320: {
-      slidesPerView: 1.6,
-      spaceBetween: 25
+function initSwiper(
+  el: string,
+  options?: Partial<SwiperOptions>
+) {
+  const defaultOptions: SwiperOptions = {
+    modules: [Navigation, Pagination],
+    direction: 'horizontal',
+    loop: false,
+    slidesPerView: 1,
+    spaceBetween: 25,
+    watchOverflow: true,
+    watchSlidesProgress: true,
+    mousewheel: {
+      invert: true,
     },
-    600: {
-      slidesPerView: 2,
-      spaceBetween: 25
+    breakpoints: {
+      320: { slidesPerView: 1.6, spaceBetween: 25 },
+      600: { slidesPerView: 2, spaceBetween: 25 },
+      900: { slidesPerView: 2, spaceBetween: 25 },
+      1200: { slidesPerView: 3, spaceBetween: 30 },
+      1440: { slidesPerView: 3, spaceBetween: 80 },
+      1920: { slidesPerView: 3, spaceBetween: 80 }
     },
-    900: {
-      slidesPerView: 2,
-      spaceBetween: 25
+    navigation: {
+      nextEl: `${el}__btn_next`,
+      prevEl: `${el}__btn_prev`,
     },
-    1200: {
-      slidesPerView: 3,
-      spaceBetween: 30
-    },
-    1440: {
-      slidesPerView: 3,
-      spaceBetween: 80
-    },
-    1920: {
-      slidesPerView: 3,
-      spaceBetween: 80
-    }
-  },
-  pagination: {
-    el: '.info__pagination',
-    type: 'bullets',
-    clickable: true
-  },
-  navigation: {
-    nextEl: '.info__btn_next',
-    prevEl: '.info__btn_prev',
-  },
-};
+    ...options,
+  };
 
-const swiper = new Swiper('.info', swiperOptions);
+  return new Swiper(el, defaultOptions);
+}
+
+initSwiper('.info');

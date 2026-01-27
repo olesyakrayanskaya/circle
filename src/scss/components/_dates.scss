@@ -58,7 +58,7 @@
     &__period {
         position: absolute;
         top: calc(variables.$radius - 70px);
-        left: 0;
+        left: -20px;
         z-index: 1;
         width: 100%;
         text-align: center;
@@ -244,6 +244,13 @@
     font-weight: 700;
     font-size: 20px;
     line-height: 150%;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &_active {
+       opacity: 1;
+       transition: opacity 0.2s; 
+    }
 
     @media (max-width: variables.$mobile-bp) {
         position: static;
