@@ -5,7 +5,7 @@
     font-size: 56px;
     line-height: 120%;
 
-    @media (max-width: 600px) {
+    @media (max-width: variables.$mobile-bp) {
         font-size: 20px;
     }
 }
@@ -18,7 +18,11 @@
     text-align: center;
     color: variables.$start-date-color;
 
-    @media (max-width: 600px) {
+    @media (max-width: variables.$tablet-bp) {
+        font-size: 96px;
+    }
+
+    @media (max-width: variables.$mobile-bp) {
         font-size: 56px;
     }
 }
@@ -31,7 +35,11 @@
     text-align: center;
     color: variables.$end-date-color;
 
-    @media (max-width: 600px) {
+    @media (max-width: variables.$tablet-bp) {
+        font-size: 96px;
+    }
+
+    @media (max-width: variables.$mobile-bp) {
         font-size: 56px;
     }
 }
@@ -44,7 +52,7 @@
     text-transform: uppercase;
     color: variables.$date-info-color;
 
-    @media (max-width: 600px) {
+    @media (max-width: variables.$mobile-bp) {
         font-size: 16px;
     }
 }

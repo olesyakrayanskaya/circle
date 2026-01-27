@@ -4,27 +4,37 @@
 .dates {
     position: relative;
     min-height: 800px;
-    padding-top: variables.$padding-top;
 
     &::before {
         content: '';
         position: absolute;
-        top: calc(variables.$padding-top + variables.$radius - 0.5px);
-        left: 0;
+        top: calc(variables.$radius - 0.5px + variables.$circle-top);
+        left: -1*variables.$padding-left;
         z-index: 1;
-        width: 100%;
+        width: calc(100% + variables.$padding-right + variables.$padding-left);
+        max-width: 1440px;
         height: 1px;
         background-color: rgba(variables.$main-color, 0.1);
+
+        @media (max-width: variables.$mobile-bp) {
+            width: 100%;
+            background-color: #C7CDD9;
+            left: 0;
+        }
+
     }
 
     @media (max-width: variables.$mobile-bp) {
-        margin-top: 60px;
+        min-height: 300px;
     }
 
     &__title {
         position: relative;
         @include mixins.h2-text;
-        padding-left: variables.$padding-left;
+
+        @media (max-width: variables.$mobile-bp) {
+            margin-bottom: variables.$padding-top-sm;
+        }
 
         &::before {
             content: '';
@@ -32,30 +42,58 @@
             width: 5px;
             height: 100%;
             top: 0;
-            left: 0;
+            left: calc(-1*variables.$padding-left);
             background: linear-gradient(to bottom,
                     #3877EE -5.56%,
                     #3877EE 0%,
                     #EF5DA8 94.44%,
                     #EF5DA8 100%);
+
+            @media (max-width: variables.$mobile-bp) {
+                display: none;
+            }
         }
     }
 
     &__period {
         position: absolute;
-        top: calc(variables.$padding-top + variables.$radius - 78.5px);
+        top: calc(variables.$radius - 70px);
         left: 0;
         z-index: 1;
         width: 100%;
         text-align: center;
         pointer-events: none;
+        white-space: nowrap;
+
+        @media (max-width: variables.$tablet-bp) {
+            top: calc(variables.$radius - 20px);
+        }
+
+        @media (max-width: variables.$mobile-bp) {
+            position: static;
+            text-align: left;
+            margin-bottom: variables.$padding-top-sm;
+        }
 
         .start {
             @include mixins.start-date-text;
+            display: inline-block;
+            margin-right: 50px;
+
+            @media (max-width: variables.$tablet-bp) {
+                margin-right: 10px;
+            }
         }
 
         .end {
             @include mixins.end-date-text;
+            display: inline-block;
+            margin-left: 50px;
+
+            @media (max-width: variables.$tablet-bp) {
+                margin-left: 10px;
+            }
+
         }
     }
 
@@ -67,11 +105,15 @@
         align-items: center;
         width: 2*variables.$radius;
         height: 2*variables.$radius;
-        left: calc(50% - variables.$radius);
-        top: variables.$padding-top;
+        left: calc(50% - variables.$radius - 18px);
+        top: variables.$circle-top;
         border: 1px solid rgba(variables.$main-color, 0.1);
         border-radius: 50%;
         pointer-events: all;
+
+        @media (max-width: variables.$mobile-bp) {
+            display: none;
+        }
     }
 
     &__point {
@@ -88,7 +130,7 @@
         height: variables.$point-radius*2;
         border-radius: 50%;
         background-color: variables.$main-color;
-        transition: width variables.$transition-time linear, height variables.$transition-time linear;
+        transition: all variables.$transition-time linear;
 
         // Анимация движения по окружности
         animation-duration: 12s;
@@ -132,6 +174,32 @@
     cursor: pointer;
 }
 
+@media (hover:hover) {
+
+    &__point:hover:not(.dates__point_active) {
+        margin-left: -1*variables.$item-radius;
+        margin-top: -1*variables.$item-radius;
+        width: variables.$item-radius*2;
+        height: variables.$item-radius*2;
+        background-color: variables.$bcg-color;
+        border: 1px solid rgba(variables.$item-active-color, 0.5);
+    }
+
+}
+
+@media (hover:none) {
+
+    &__point:active:not(.dates__point_active) {
+        margin-left: -1*variables.$item-radius;
+        margin-top: -1*variables.$item-radius;
+        width: variables.$item-radius*2;
+        height: variables.$item-radius*2;
+        background-color: variables.$bcg-color;
+        border: 1px solid rgba(variables.$item-active-color, 0.5);
+    }
+
+}
+
 &__point_active {
     margin-left: -1*variables.$item-radius;
     margin-top: -1*variables.$item-radius;
@@ -142,35 +210,71 @@
 }
 
 &__item-num {
-    display: none;
+    opacity: 0;
     font-weight: 400;
     font-size: 20px;
     line-height: 150%;
+    transition: opacity 0.2s linear;
 }
 
 &__point_active>&__item-num {
-    display: inline;
+    opacity: 1;
+}
+
+@media (hover:hover) {
+
+    &__point:hover:not(.dates__point_active)>&__item-num {
+        opacity: 1;
+    }
+
+}
+
+@media (hover:none) {
+
+    &__point:active:not(.dates__point_active)>&__item-num {
+        opacity: 1;
+    }
+
 }
 
 &__info-title {
     position: absolute;
-    left: calc(50% + variables.$radius - 84px);
-    top: calc(variables.$padding-top + variables.$item-radius - 10px);
+    left: calc(50% + variables.$radius - 110px);
+    top: 40px;
     font-weight: 700;
     font-size: 20px;
     line-height: 150%;
+
+    @media (max-width: variables.$mobile-bp) {
+        position: static;
+        font-size: 16px;
+    }
 }
 
 &__pagination {
     position: absolute;
     bottom: 0;
-    left: variables.$padding-left;
+    left: 0;
+    width: 100%;
+    margin-bottom: 56px;
+
+    @media (max-width: variables.$mobile-bp) {
+        position: fixed;
+        left: variables.$padding-left-sm;
+        bottom: 30px;
+        width: 100%;
+        margin-bottom: 0;
+    }
 }
 
 &__num {
     margin-bottom: 20px;
     font-weight: 400;
     font-size: 14px;
+
+    @media (max-width: variables.$mobile-bp) {
+        margin-bottom: 0px;
+    }
 }
 
 &__btns {
@@ -178,6 +282,10 @@
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
+
+    @media (max-width: variables.$mobile-bp) {
+        gap: 8px;
+    }
 }
 
 &__btn {
@@ -190,6 +298,15 @@
     background-color: transparent;
     transition: background-color variables.$transition-time linear;
     border: 1px solid rgba(variables.$main-color, 0.5);
+
+    @media (max-width: variables.$mobile-bp) {
+        width: 25px;
+        height: 25px;
+
+        & svg {
+            width: 6px;
+        }
+    }
 
     @media (hover:hover) {
         &:hover {
@@ -214,6 +331,35 @@
 
     &:disabled svg path {
         stroke: rgba(#9BA5B9, 0.5);
+    }
+}
+
+&__actions {
+    width: 100%;
+}
+
+&__bullets {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    @media (min-width: 900px) {
+        display: none;
+    }
+}
+
+&__bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgba(variables.$main-color, 0.4);
+    transition: background-color 0.2s linear;
+    cursor: pointer;
+
+    &_active {
+        background-color: rgba(variables.$main-color, 1);
     }
 }
 

@@ -3,27 +3,29 @@
 
 .info.swiper {
     width: 100%;
-    padding-left: variables.$padding-left;
-    padding-top: 56px;
-    padding-right: 42px;
-    padding-bottom: 30px;
 }
 
 .info {
-    overflow: visible;    
+    overflow: visible;
 
     &__inner {
         width: 100%;
         position: relative;
     }
 
-    .info__slide {
+    &__slide {
         opacity: 1;
         transition: opacity 0.2s;
     }
 
-    .info__slide:not(.swiper-slide-visible) {
+    &__slide:not(.swiper-slide-visible) {
         opacity: 0;
+    }
+
+    @media (max-width: variables.$mobile-bp) {
+        &__slide:not(.swiper-slide-active) {
+            opacity: 0.4;
+        }
     }
 
     &__title {
@@ -48,6 +50,10 @@
         background-color: #FFFF;
         box-shadow: 0 0 15px 0 rgba(56, 119, 238, 0.1);
         cursor: pointer;
+
+        @media (max-width: variables.$mobile-bp) {
+            display: none;
+        }
 
         &_next {
             right: 30px;

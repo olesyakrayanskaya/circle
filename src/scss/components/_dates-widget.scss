@@ -1,10 +1,26 @@
 @use '../abstracts/variables';
 @use '../abstracts/mixins';
 
-.dates-widget {
-    min-height: 100vh;
+.dates-widget { 
+    position: relative;   
+    padding-top: variables.$padding-top;
+    padding-right: variables.$padding-right;
+    padding-left: variables.$padding-left;
+    padding-bottom: variables.$padding-bottom;
     border-left: 1px solid rgba(variables.$main-color, 0.1);
     border-right: 1px solid rgba(variables.$main-color, 0.1);
+
+    @media (max-width: variables.$tablet-bp) {
+        border-left: none;
+        border-right: none;
+    }
+
+    @media (max-width: variables.$mobile-bp) {
+        padding-top: variables.$padding-top-sm;
+        padding-right: variables.$padding-right-sm;
+        padding-left: variables.$padding-left-sm;
+        padding-bottom: variables.$padding-bottom-sm;
+    }
 
     &::before {
         content: '';
@@ -20,4 +36,5 @@
             display: none;
         }
     }
+
 }
