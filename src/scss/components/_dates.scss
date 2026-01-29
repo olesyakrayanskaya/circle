@@ -3,7 +3,7 @@
 
 .dates {
     position: relative;
-    min-height: 800px;
+    min-height: 650px;
 
     &::before {
         content: '';
@@ -244,7 +244,7 @@
         @media (max-width: variables.$mobile-bp) {
             position: fixed;
             left: variables.$padding-left-sm;
-            bottom: 30px;
+            top: calc(100dvh - 65px);
             width: 100%;
             margin-bottom: 0;
         }

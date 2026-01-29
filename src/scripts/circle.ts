@@ -84,6 +84,7 @@ function createWidget(widgetId: string, dataSourse: TDataSourceFunc): HTMLElemen
     for (let i = 0; i < displayData.length; i++) {
         let datesBullet = document.createElement('span');
         datesBullet.className = 'dates__bullet';
+        datesBullet.setAttribute('data-index-bul', i.toString());
         datesBullets.append(datesBullet);
     }
 
@@ -106,6 +107,10 @@ function createWidget(widgetId: string, dataSourse: TDataSourceFunc): HTMLElemen
                                         stroke-width="2" />
                         </svg>`;
     datesBtns.append(btnNext);
+
+    let swipers = document.createElement('div');
+    swipers.className = 'swipers';
+    widget.append(swipers);
 
     for (let i = 0; i < displayData.length; i++) {
         let infoSwiper = document.createElement('div');
@@ -135,7 +140,7 @@ function createWidget(widgetId: string, dataSourse: TDataSourceFunc): HTMLElemen
             infoSwiperWrapper.append(infoSlide);
         }
 
-        infoSwiper.append(infoSwiperWrapper);
+        infoSwiper.append(infoSwiperWrapper);        
 
         let infoSwiperBtnPrev = document.createElement('button');
         infoSwiperBtnPrev.className = `${widgetId}-info-${i + 1}__btn_prev info__btn info__btn_prev`;
@@ -155,7 +160,8 @@ function createWidget(widgetId: string, dataSourse: TDataSourceFunc): HTMLElemen
 
         infoSwiper.append(infoSwiperBtnNext);
 
-        widget.append(infoSwiper);
+        swipers.append(infoSwiper);
+        widget.append(swipers);
         initSwiper(`.${widgetId}-info-${i + 1}`);
     }
 
@@ -217,10 +223,20 @@ export function createDateCircle(widgetId: string, dataSourse: TDataSourceFunc) 
 
                     if (step === 0) {
                         infoTitle.innerHTML = currentData.title ? currentData.title : '';
-
                         const dataIndex = Number(point.getAttribute('data-index'));
+
+                        const slidersWrapper = datesWidget.querySelector('.swipers');
+                        slidersWrapper.classList.remove('animated-fade-in');
+                        slidersWrapper.classList.add('animated-fade-out');
+
                         const sl = datesWidget.querySelector(`.${widgetId}-info-${dataIndex + 1}`);
-                        sl.classList.remove('hidden');
+
+                        setTimeout(() => {                            
+                            sl.classList.remove('hidden');
+                            slidersWrapper.classList.remove('animated-fade-out');
+                            slidersWrapper.classList.add('animated-fade-in');
+                        }, 100);                       
+                        
                     }
                 }
 
@@ -255,8 +271,6 @@ export function createDateCircle(widgetId: string, dataSourse: TDataSourceFunc) 
 
     function rotateCirclePoints(points: HTMLElement[], steps: number): void {
 
-
-
         const infoTitle: HTMLElement | null = datesWidget.querySelector('.dates__info-title');
         infoTitle.innerHTML = '';
 
@@ -272,7 +286,7 @@ export function createDateCircle(widgetId: string, dataSourse: TDataSourceFunc) 
         };
 
         points.forEach((point) => {
-            let style = window.getComputedStyle(point, null).getPropertyValue('transition');
+            // let style = window.getComputedStyle(point, null).getPropertyValue('transition');
             const dataAngStep = Number(point.getAttribute('data-ang-step'));
             const angleDeg = (dataAngStep + steps - 1) * angleStep;
             point.style.transform =
