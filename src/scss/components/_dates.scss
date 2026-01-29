@@ -112,7 +112,13 @@
         pointer-events: all;
 
         @media (max-width: variables.$mobile-bp) {
-            display: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            height: 6px;
+            border: none;
         }
     }
 
@@ -135,9 +141,21 @@
             margin-left variables.$transition-time linear,
             margin-top variables.$transition-time linear;
         cursor: pointer;
+
+        @media (max-width: variables.$mobile-bp) {
+            position: static;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            border: none;
+            margin-left: 0;
+            margin-top: 0;
+            background-color: rgba(variables.$main-color, 0.4);
+            transition: background-color variables.$transition-time linear;
+        }
     }
 
-    @media (hover:hover) {
+    @media (hover:hover) and (min-width: 577px) {
 
         &__point:hover:not(.dates__point_active) {
             margin-left: -1*variables.$item-radius;
@@ -152,9 +170,12 @@
                 margin-top variables.$transition-time linear;
         }
 
+        @media (max-width: variables.$mobile-bp) {
+            transition: none;
+        }
     }
 
-    @media (hover:none) {
+    @media (hover:none) and (min-width: 577px) {
 
         &__point:active:not(.dates__point_active) {
             margin-left: -1*variables.$item-radius;
@@ -167,6 +188,11 @@
                 height variables.$transition-time linear,
                 margin-left variables.$transition-time linear,
                 margin-top variables.$transition-time linear;
+        }
+
+
+        @media (max-width: variables.$mobile-bp) {
+            transition: none;
         }
 
     }
@@ -182,7 +208,16 @@
             height variables.$transition-time linear,
             margin-left variables.$transition-time linear,
             margin-top variables.$transition-time linear;
-        caret-color: transparent;
+
+        @media (max-width: variables.$mobile-bp) {
+            width: 6px;
+            height: 6px;
+            margin-left: 0;
+            margin-top: 0;
+            border: none;
+            transition: background-color variables.$transition-time linear;
+            background-color: rgba(variables.$main-color, 1);
+        }
     }
 
     &__item-num {
@@ -191,6 +226,10 @@
         font-size: 20px;
         line-height: 150%;
         transition: opacity 0.2s linear;
+
+        @media (max-width: variables.$mobile-bp) {
+            display: none;
+        }
     }
 
     &__point_active>&__item-num {
@@ -242,11 +281,9 @@
         margin-bottom: 56px;
 
         @media (max-width: variables.$mobile-bp) {
-            position: fixed;
-            left: variables.$padding-left-sm;
-            top: calc(100dvh - 65px);
-            width: 100%;
-            margin-bottom: 0;
+            position: static;
+            width: 100%;           
+            margin-bottom: 20px;
         }
     }
 
