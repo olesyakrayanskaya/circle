@@ -76,6 +76,9 @@
     min-height: 230px;
 
     @media (max-width: variables.$mobile-bp) {
-        min-height: 130px;
+        position: absolute;
+        width: 100%;
+        min-height: auto;
+        top: 60dvh;
     }
 }

@@ -20,6 +20,7 @@
         padding-right: variables.$padding-right-sm;
         padding-left: variables.$padding-left-sm;
         padding-bottom: variables.$padding-bottom-sm;
+        min-height: 90dvh;
     }
 
     &::before {
