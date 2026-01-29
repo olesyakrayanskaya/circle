@@ -19,6 +19,8 @@ export function getEvents(): TEvent[] {
     return data.events as TEvent[];
 }
 
+export type TDataSourceFunc = () => TDisplayData[];
+
 type TDisplayData = {
     "start": number,
     "end": number,

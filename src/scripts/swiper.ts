@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 
 Swiper.use([Navigation, Pagination]);
 
-function initSwiper(
+export function initSwiper(
   el: string,
   options?: Partial<SwiperOptions>
 ) {
@@ -41,4 +41,5 @@ function initSwiper(
   return new Swiper(el, defaultOptions);
 }
 
-initSwiper('.info');
+// initSwiper('.info111');
+// initSwiper('.widget-2-info-1');

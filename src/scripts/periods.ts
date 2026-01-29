@@ -1,17 +1,34 @@
-const time: number = 20000;
-const step: number = 1;
-
-function outNum(num: number, elem: string): void {
-  let e: HTMLElement | undefined = document.querySelector(elem);
-  let n: number = Number(e.innerHTML);
-  let t = Math.round(time / (num / step));
-  let interval = setInterval(() => {
-    n = n + step;
-    if (n === num) {
-      clearInterval(interval);
-    }
-    e.innerHTML = n.toString();
-  }, t);
+interface IncrementAnimVar {
+  time: number;
+  step: number;
 }
 
-outNum(2050, ".start");
+const animVar: IncrementAnimVar = {
+  time: 40000,
+  step: 1
+};
+
+export function dateIncrementAnimation(num: number, e: Element): void {
+  let n: number = Number(e.innerHTML);
+  if (n === num) {
+    return;
+  }
+  let t = Math.round(animVar.time / (num / animVar.step));
+  if (n < num) {
+    let interval = setInterval(() => {
+      n = n + animVar.step;
+      if (n >= num) {
+        clearInterval(interval);
+      }
+      e.innerHTML = n.toString();
+    }, t);
+  } else {
+    let interval = setInterval(() => {
+      n = n - animVar.step;
+      if (n <= num) {
+        clearInterval(interval);
+      }
+      e.innerHTML = n.toString();
+    }, t);
+  }
+}
